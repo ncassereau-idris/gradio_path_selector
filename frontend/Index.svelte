@@ -10,8 +10,6 @@
 
 	export let gradio: Gradio<{
 		change: never;
-		submit: never;
-		input: never;
 		clear_status: LoadingStatus;
 	}>;
 	export let label = "File explorer";
@@ -19,30 +17,21 @@
 	export let elem_classes: string[] = [];
 	export let visible = true;
 	export let value = "";
-	// export let placeholder = "";
 	export let show_label: boolean;
 	export let scale: number | null = null;
 	export let min_width: number | undefined = undefined;
 	export let loading_status: LoadingStatus | undefined = undefined;
-	// export let value_is_output = false;
-	// export let interactive: boolean;
-	// export let rtl = false;
 
 	let copying: boolean = false;
 
 	let path = "";
 	let directories = [];
 
-	let el: HTMLTextAreaElement | HTMLInputElement;
-	const container = true;
-
 	function handle_change(): void {
 		let obj = JSON.parse(value);
 		if (obj.status == "download") {
 			path = obj.current_path;
-			if (obj.available_directories.length > 0) {
-				directories = obj.available_directories;
-			}
+			directories = obj.available_directories;
 		}
 	}
 
@@ -64,14 +53,6 @@
 			setTimeout(() => {
 				if (copying) copying = false;
 			}, 1000);
-		}
-	}
-
-	async function handle_keypress(e: KeyboardEvent): Promise<void> {
-		await tick();
-		if (e.key === "Enter") {
-			e.preventDefault();
-			gradio.dispatch("submit");
 		}
 	}
 
@@ -154,10 +135,11 @@
 	*,
 	*:after,
 	*:before{
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
 	}
+
 	.parent {
 		display: grid;
 	    grid-template-columns: 4fr minmax(max-content, 1fr);
