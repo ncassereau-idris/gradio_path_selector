@@ -12,12 +12,7 @@ if TYPE_CHECKING:
     from gradio.components import Timer
 
 
-class FileExplorer(Component):
-
-    """
-    Creates a very simple textbox for user to enter string input or display string output.
-    """
-
+class PathSelector(Component):
     EVENTS = [
         Events.change,
     ]
@@ -73,9 +68,6 @@ class FileExplorer(Component):
         if Context.root_block is not None:
             self.subscribe()
 
-    def subscribe(self):
-        self.change(self.refresh_value, self, self)
-
     @staticmethod
     def get_listdir(path: Path) -> list[str]:
         # if path is None:
@@ -88,14 +80,44 @@ class FileExplorer(Component):
 
     @staticmethod
     def init_value() -> dict:
-        return FileExplorer.get_value(Path.cwd())
+        return PathSelector.get_value(Path.cwd())
 
     @staticmethod
     def get_value(path: Path) -> dict:
         return {
             "current_path": str(path),
-            "available_directories": FileExplorer.get_listdir(path),
+            "available_directories": PathSelector.get_listdir(path),
         }
+
+    def subscribe(self):
+        self.change(self.refresh_value, self, self)
+
+    def preprocess(self, payload):
+        """
+        This docstring is used to generate the docs for this custom component.
+        Parameters:
+            payload: the data to be preprocessed, sent from the frontend
+        Returns:
+            the data after preprocessing, sent to the user's function in the backend
+        """
+        if payload is None:
+            return None
+        else:
+            return json.loads(payload)
+
+    def postprocess(self, value):
+        """
+        This docstring is used to generate the docs for this custom component.
+        Parameters:
+            payload: the data to be postprocessed, sent from the user's function in the backend
+        Returns:
+            the data after postprocessing, sent to the frontend
+        """
+        if value is None:
+            return None
+        else:
+            value["status"] = "download"
+            return json.dumps(value)
 
     @staticmethod
     def refresh_value(D: dict):
@@ -105,38 +127,13 @@ class FileExplorer(Component):
             path = current_path.parent
         else:
             path = current_path / directory
-        return FileExplorer.get_value(path)
+        return PathSelector.get_value(path)
 
-    def preprocess(self, payload: str | None) -> Path | None:
-        """
-        Parameters:
-            payload: the text entered in the textarea.
-        Returns:
-            Passes text value as a {str} into the function.
-        """
-        if payload is None:
-            return None
-        else:
-            return json.loads(payload)
+    def example_payload(self):
+        return {"foo": "bar"}
 
-    def postprocess(self, value: str | None) -> str | None:
-        """
-        Parameters:
-            value: Expects a {str} returned from function and sets textarea value to it.
-        Returns:
-            The value to display in the textarea.
-        """
-        if value is None:
-            return None
-        else:
-            value["status"] = "download"
-            return json.dumps(value)
+    def example_value(self):
+        return {"foo": "bar"}
 
-    def api_info(self) -> dict[str, Any]:
-        return {"type": "string"}
-
-    def example_payload(self) -> Any:
-        return "Hello!!"
-
-    def example_value(self) -> Any:
-        return "Hello!!"
+    def api_info(self):
+        return {"type": {}, "description": "any valid json"}

@@ -1,5 +1,5 @@
 {
-  "name": "gradio_fileexplorer",
+  "name": "gradio_path_selector",
   "version": "0.3.9",
   "description": "Gradio UI packages",
   "type": "module",

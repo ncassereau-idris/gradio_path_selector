@@ -7,7 +7,7 @@ requires = [
 build-backend = "hatchling.build"
 
 [project]
-name = "gradio_fileexplorer"
+name = "gradio_path_selector"
 version = "0.0.1"
 description = "Python library for easily interacting with trained machine learning models"
 readme = "README.md"
@@ -48,7 +48,7 @@ classifiers = [
 dev = ["build", "twine"]
 
 [tool.hatch.build]
-artifacts = ["/backend/gradio_fileexplorer/templates", "*.pyi"]
+artifacts = ["/backend/gradio_path_selector/templates", "*.pyi", "/home/user/work/aze/gradio_file_explorer/backend/gradio_path_selector/templates"]
 
 [tool.hatch.build.targets.wheel]
-packages = ["/backend/gradio_fileexplorer"]
+packages = ["/backend/gradio_path_selector"]
