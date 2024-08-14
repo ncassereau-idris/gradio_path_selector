@@ -48,7 +48,7 @@ classifiers = [
 dev = ["build", "twine"]
 
 [tool.hatch.build]
-artifacts = ["/backend/gradio_path_selector/templates", "*.pyi", "/home/user/work/aze/gradio_file_explorer/backend/gradio_path_selector/templates"]
+artifacts = ["/backend/gradio_path_selector/templates", "*.pyi"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["/backend/gradio_path_selector"]

@@ -31,7 +31,7 @@ from pathlib import Path
 
 
 with gr.Blocks() as demo:
-    gr.PathSelector()
+    PathSelector()
     # component = gr.FileExplorer()
     # component.change(component.refresh_value, component, component)
     # component.subscribe()
@@ -118,19 +118,6 @@ Timer | float | None
 </tr>
 
 <tr>
-<td align="left"><code>inputs</code></td>
-<td align="left" style="width: 25%;">
-
-```python
-Component | Sequence[Component] | set[Component] | None
-```
-
-</td>
-<td align="left"><code>None</code></td>
-<td align="left">Components that are used as inputs to calculate `value` if `value` is a function (has no effect otherwise). `value` is recalculated any time the inputs change.</td>
-</tr>
-
-<tr>
 <td align="left"><code>show_label</code></td>
 <td align="left" style="width: 25%;">
 
@@ -170,19 +157,6 @@ int
 </tr>
 
 <tr>
-<td align="left"><code>interactive</code></td>
-<td align="left" style="width: 25%;">
-
-```python
-bool | None
-```
-
-</td>
-<td align="left"><code>None</code></td>
-<td align="left">if True, will be rendered as an editable textbox; if False, editing will be disabled. If not provided, this is inferred based on whether the component is used as an input or output.</td>
-</tr>
-
-<tr>
 <td align="left"><code>visible</code></td>
 <td align="left" style="width: 25%;">
 
@@ -193,19 +167,6 @@ bool
 </td>
 <td align="left"><code>True</code></td>
 <td align="left">If False, component will be hidden.</td>
-</tr>
-
-<tr>
-<td align="left"><code>rtl</code></td>
-<td align="left" style="width: 25%;">
-
-```python
-bool
-```
-
-</td>
-<td align="left"><code>False</code></td>
-<td align="left">If True and `type` is "text", sets the direction of the text to right-to-left (cursor appears on the left of the text). Default is False, which renders cursor on the right.</td>
 </tr>
 
 <tr>
@@ -267,8 +228,6 @@ int | str | None
 | name | description |
 |:-----|:------------|
 | `change` | Triggered when the value of the PathSelector changes either because of user input (e.g. a user types in a textbox) OR because of a function update (e.g. an image receives a value from the output of an event trigger). See `.input()` for a listener that is only triggered by user input. |
-| `input` | This listener is triggered when the user changes the value of the PathSelector. |
-| `submit` | This listener is triggered when the user presses the Enter key while the PathSelector is focused. |
 
 
 
