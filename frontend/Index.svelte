@@ -12,7 +12,7 @@
 		change: never;
 		clear_status: LoadingStatus;
 	}>;
-	export let label = "File explorer";
+	export let label = "Path Selector";
 	export let elem_id = "";
 	export let elem_classes: string[] = [];
 	export let visible = true;
@@ -31,14 +31,14 @@
 		let obj = JSON.parse(value);
 		if (obj.status == "download") {
 			path = obj.current_path;
-			directories = obj.available_directories;
+			directories = obj.directories;
 		}
 	}
 
-	function click(index: number): void {
+	function click(directory): void {
 		let obj = {
+			"selected_directory": directory,
 			"current_path": path,
-			"selected_directory": index > -1 ? directories[index] : -1,
 			"status": "upload",
 		}
 		value = JSON.stringify(obj)
@@ -113,20 +113,31 @@
 			on:keypress={() => click(-1)}
 			tabindex="0"
 			>
-			Up
+				<svg
+					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
+					width="16" height="16" style="display: inline; fill: white;">
+					<polygon points="0 45, 45 10, 45 80"/>
+					<polygon points="40 45, 85 10, 85 80"/>
+				</svg>
+				Up
 		</div>
 		{#each directories as directory, i}
 			<div
 				class="directory_option"
 				role="button"
-				on:click={() => click(i)}
-				on:keypress={() => click(i)}
+				on:click={() => click(directory)}
+				on:keypress={() => click(directory)}
 				tabindex="0"
 			>
+				<svg
+					aria-hidden="true" focusable="false" role="img" class="Octicon-sc-9kayk9-0 fczqEI" viewBox="0 0 16 16"
+					width="16" height="16" fill="currentColor" style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+				>
+					<path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"></path>
+				</svg>
 				{directory}
 			</div>
 		{/each}
-
 	</div>
 
 </Block>

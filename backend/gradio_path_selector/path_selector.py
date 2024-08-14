@@ -74,7 +74,8 @@ class PathSelector(Component):
         #     path = Path.cwd()
         listdir = sorted(list(path.iterdir()))
         if len(listdir) > 0:
-            return [p.name for p in listdir if p.is_dir()]
+            dirs = [p.name for p in listdir if p.is_dir()]
+            return dirs
         else:
             return []
 
@@ -84,9 +85,10 @@ class PathSelector(Component):
 
     @staticmethod
     def get_value(path: Path) -> dict:
+        dirs = PathSelector.get_listdir(path)
         return {
             "current_path": str(path),
-            "available_directories": PathSelector.get_listdir(path),
+            "directories": dirs,
         }
 
     def subscribe(self):
