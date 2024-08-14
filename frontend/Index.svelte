@@ -93,15 +93,17 @@
 			class="submit_btn lg secondary svelte-cmf5ev"
 			on:click={copy}
 		>
-		<div class="copy_icon">
-			<svg class="clippy_icon" viewBox="0 0 16 16" class:copying>
+		<div>
+			<svg class="clippy_icon" width="16" height="16" viewBox="0 0 16 16" class:copying>
 				<path class="path1" d="M5.75 4.75H10.25V1.75H5.75V4.75Z" />
 				<path class="path2" d="M3.25 2.88379C2.9511 3.05669 2.75 3.37987 2.75 3.75001V13.25C2.75 13.8023 3.19772 14.25 3.75 14.25H12.25C12.8023 14.25 13.25 13.8023 13.25 13.25V3.75001C13.25 3.37987 13.0489 3.05669 12.75 2.88379" />
 			</svg>
-			<svg class="check_icon" viewBox="0 0 16 16" class:copying>
+			<svg class="check_icon" width="16" height="16" viewBox="0 0 16 16" class:copying>
+				<circle cx=8 cy=8 r=8 style="fill: green; stroke-width: 0;"/>
 				<path d="M13.25 4.75L6 12L2.75 8.75" />
 			</svg>
 		</div>
+		Copy path
 		</button>
 	</div>
 
@@ -177,34 +179,30 @@
 	}
 
 	.submit_btn {
-		display: flex;
+		display: inline-flex;
 		width: 100%;
 		align-items: center;
   		justify-content: center;
 	}
 
-	.copy_icon {
-		display: block;
+	.submit_btn>div {
 		position: relative;
-		height: 16px;
 		width: 16px;
+		height: 16px;
+		margin-right: 5px;
 	}
-
-	.copy_icon>svg {
+	.submit_btn>div>svg {
 		position: absolute;
 		width: inherit;
 		height: inherit;
 		fill: "none";
 		stroke: white;
+		width: 16px;
+		height: 16px;
 		stroke-width: "1.5";
 		stroke-linecap: "round";
 		stroke-linejoin: "round";
 
-	}
-	.copy_icon::after {
-		position: absolute;
-		content: "Copy path";
-		left: 16px;
 	}
 
 	svg.clippy_icon {
@@ -223,7 +221,7 @@
 		fill-opacity: 0.3;
 	}
 	svg.check_icon {
-		fill: green;
+		fill: transparent;
 		top: 0;
 		left: 0;
 		opacity: 0;
