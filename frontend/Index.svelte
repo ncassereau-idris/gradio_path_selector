@@ -30,6 +30,8 @@
 	let separator = "/";
 	let selected_file_idx = -1;
 
+	let full_path = path;
+
 	function handle_change(): void {
 		let obj = JSON.parse(value);
 		if (obj.status == "download") {
@@ -37,6 +39,7 @@
 			directories = obj.directories;
 			files = obj.files;
 			separator = obj.separator;
+			update_full_filename();
 		}
 	}
 
@@ -57,18 +60,27 @@
 			} else {
 				selected_file_idx = inode_idx;
 			}
+			update_full_filename();
 		}
 	}
 
 	function copy(): void {
 		// Copy the text inside the text field
-		navigator.clipboard.writeText(path);
+		navigator.clipboard.writeText(full_path);
 		if (!copying) {
 			copying = true
 			setTimeout(() => {
 				if (copying) copying = false;
 			}, 1000);
 		}
+	}
+
+	function update_full_filename(): void {
+		let fullname = path;
+		if (selected_file_idx != -1) {
+			fullname = fullname + separator + files[selected_file_idx]
+		}
+		full_path = fullname
 	}
 
 	$: if (value === null) value = "";
@@ -103,7 +115,7 @@
 	<div class="parent">
 		<div
 			class="scroll-hide path_box"
-		>{path}{#if selected_file_idx != -1}{separator}{files[selected_file_idx]}{/if}</div>
+		>{full_path}</div>
 		<button
 			class="submit_btn lg secondary svelte-cmf5ev"
 			on:click={copy}

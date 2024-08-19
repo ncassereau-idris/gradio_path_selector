@@ -79,7 +79,7 @@ class PathSelector(Component):
             files = [p.name for p in listdir if p.is_file()]
             return dirs, files
         else:
-            return []
+            return [], []
 
     @staticmethod
     def init_value() -> dict:
