@@ -26,23 +26,38 @@
 
 	let path = "";
 	let directories = [];
+	let files = [];
+	let separator = "/";
+	let selected_file_idx = -1;
 
 	function handle_change(): void {
 		let obj = JSON.parse(value);
 		if (obj.status == "download") {
 			path = obj.current_path;
 			directories = obj.directories;
+			files = obj.files;
+			separator = obj.separator;
 		}
 	}
 
-	function click(directory): void {
-		let obj = {
-			"selected_directory": directory,
-			"current_path": path,
-			"status": "upload",
+	function click(inode_idx, type): void {
+		if (type === "dict") {
+			let obj = {
+				"selected_inode": inode_idx === -1 ? -1 : directories[inode_idx],
+				"current_path": path,
+				"status": "upload",
+			}
+			value = JSON.stringify(obj)
+			selected_file_idx = -1;
+			gradio.dispatch("change");
+		} else if (type === "file") {
+			if (selected_file_idx === inode_idx) {
+				// It's already selected so de-select it
+				selected_file_idx = -1;
+			} else {
+				selected_file_idx = inode_idx;
+			}
 		}
-		value = JSON.stringify(obj)
-		gradio.dispatch("change");
 	}
 
 	function copy(): void {
@@ -88,7 +103,7 @@
 	<div class="parent">
 		<div
 			class="scroll-hide path_box"
-		>{path}</div>
+		>{path}{#if selected_file_idx != -1}{separator}{files[selected_file_idx]}{/if}</div>
 		<button
 			class="submit_btn lg secondary svelte-cmf5ev"
 			on:click={copy}
@@ -107,12 +122,12 @@
 		</button>
 	</div>
 
-	<div class="directories">
+	<div class="inodes">
 		<div
-			class="directory_option"
+			class="inode_option"
 			role="button"
-			on:click={() => click(-1)}
-			on:keypress={() => click(-1)}
+			on:click={() => click(-1, "dict")}
+			on:keypress={() => click(-1, "dict")}
 			tabindex="0"
 			>
 				<svg
@@ -125,10 +140,10 @@
 		</div>
 		{#each directories as directory, i}
 			<div
-				class="directory_option"
+				class="inode_option"
 				role="button"
-				on:click={() => click(directory)}
-				on:keypress={() => click(directory)}
+				on:click={() => click(i, "dict")}
+				on:keypress={() => click(i, "dict")}
 				tabindex="0"
 			>
 				<svg
@@ -138,6 +153,18 @@
 					<path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"></path>
 				</svg>
 				{directory}
+			</div>
+		{/each}
+		{#each files as filename, i}
+			<div
+				class="inode_option"
+				class:selected={selected_file_idx === i}
+				role="button"
+				on:click={() => click(i, "file")}
+				on:keypress={() => click(i, "file")}
+				tabindex="0"
+			>
+				{filename}
 			</div>
 		{/each}
 	</div>
@@ -239,7 +266,7 @@
 		opacity: 1;
 	}
 
-	.directories {
+	.inodes {
 		border-radius: 5px;
 		border-width: 2px;
 		border-color: grey;
@@ -248,7 +275,7 @@
 		margin-top: 1em;
 	}
 
-	.directory_option {
+	.inode_option {
 		padding-left: 5px;
 		padding-top: auto;
 		padding-bottom: auto;
@@ -258,7 +285,7 @@
 		transition: background-color 0.2s ease-in-out;
 	}
 
-	.directory_option:hover {
+	.inode_option:hover, .inode_option.selected {
 		background-color: #198754 ;
 	}
 </style>

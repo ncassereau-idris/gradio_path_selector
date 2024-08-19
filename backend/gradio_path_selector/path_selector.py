@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any, Callable, Sequence
 
+import os
 import json
 from pathlib import Path
 from gradio.components.base import Component
@@ -75,7 +76,8 @@ class PathSelector(Component):
         listdir = sorted(list(path.iterdir()))
         if len(listdir) > 0:
             dirs = [p.name for p in listdir if p.is_dir()]
-            return dirs
+            files = [p.name for p in listdir if p.is_file()]
+            return dirs, files
         else:
             return []
 
@@ -85,10 +87,12 @@ class PathSelector(Component):
 
     @staticmethod
     def get_value(path: Path) -> dict:
-        dirs = PathSelector.get_listdir(path)
+        dirs, files = PathSelector.get_listdir(path)
         return {
             "current_path": str(path),
             "directories": dirs,
+            "files": files,
+            "separator": os.path.sep,
         }
 
     def subscribe(self):
@@ -124,7 +128,7 @@ class PathSelector(Component):
     @staticmethod
     def refresh_value(D: dict):
         current_path = Path(D["current_path"])
-        directory = D["selected_directory"]
+        directory = D["selected_inode"]
         if directory == -1:
             path = current_path.parent
         else:
