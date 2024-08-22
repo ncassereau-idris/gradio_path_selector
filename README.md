@@ -10,9 +10,9 @@ app_file: space.py
 ---
 
 # `gradio_path_selector`
-<img alt="Static Badge" src="https://img.shields.io/badge/version%20-%200.0.1%20-%20orange">  
+<img alt="Static Badge" src="https://img.shields.io/badge/version%20-%200.1.0%20-%20orange">  
 
-Python library for easily interacting with trained machine learning models
+A path Selector component for Gradio
 
 ## Installation
 
