@@ -9,9 +9,9 @@ build-backend = "hatchling.build"
 [project]
 name = "gradio_path_selector"
 version = "0.0.1"
-description = "Python library for easily interacting with trained machine learning models"
+description = "A path Selector component for Gradio"
 readme = "README.md"
-license = "Apache-2.0"
+license = "MIT"
 requires-python = ">=3.8"
 authors = [{ name = "Nathan Cassereau", email = "nathan.cassereau@gmail.com" }]
 keywords = [
