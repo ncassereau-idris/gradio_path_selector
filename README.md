@@ -1,7 +1,7 @@
 ---
-tags: [gradio-custom-component, ]
-title: gradio_fileexplorer
-short_description: A gradio custom component
+tags: [gradio-path-selector, ]
+title: gradio_path_selector
+short_description: A gradio Path Selector
 colorFrom: blue
 colorTo: yellow
 sdk: gradio
@@ -23,27 +23,11 @@ pip install gradio_path_selector
 ## Usage
 
 ```python
-
 import gradio as gr
 from gradio_path_selector import PathSelector
 
-from pathlib import Path
-
-
 with gr.Blocks() as demo:
     PathSelector()
-    # component = gr.FileExplorer()
-    # component.change(component.refresh_value, component, component)
-    # component.subscribe()
-    # component.submit(get_listdir, component, component)
-    # component.submit(test)
-    # button = gr.Button("Refresh")
-    # button.click(component.refresh_value, component, component)
-    
-    # comp = gr.TextArea("ceci est un test")
-    # comp2 = gr.Textbox("aze")
-    # comp.change(lambda x: x * 2, comp, comp2)
-
 
 if __name__ == "__main__":
     demo.launch()
