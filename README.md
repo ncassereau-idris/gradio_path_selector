@@ -10,28 +10,32 @@ app_file: space.py
 ---
 
 # `gradio_path_selector`
-<img alt="Static Badge" src="https://img.shields.io/badge/version%20-%200.1.0%20-%20orange">  
+<a href="https://pypi.org/project/gradio_path_selector/" target="_blank"><img alt="PyPI - Version" src="https://img.shields.io/pypi/v/gradio_path_selector"></a> <a href="https://github.com/ncassereau-idris/gradio_path_selector/issues" target="_blank"><img alt="Static Badge" src="https://img.shields.io/badge/Issues-white?logo=github&logoColor=black"></a> 
 
 A path Selector component for Gradio
 
 ## Installation
 
 ```bash
-pip install gradio_path_selector
+git clone https://github.com/ncassereau-idris/gradio_path_selector
+cd gradio_path_selector
+make build
+pip install dist/gradio_path_selector-*-py3-none-any.whl
 ```
 
 ## Usage
 
 ```python
 import gradio as gr
+
 from gradio_path_selector import PathSelector
+
 
 with gr.Blocks() as demo:
     PathSelector()
 
 if __name__ == "__main__":
     demo.launch()
-
 
 ```
 
