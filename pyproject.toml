@@ -40,12 +40,22 @@ classifiers = [
 # This will make it easy for people to find your deployed demo or source code when they
 # encounter your project in the wild.
 
-# [project.urls]
-# repository = "your github repository"
+[project.urls]
+repository = "https://github.com/ncassereau-idris/gradio_path_selector"
 # space = "your space url"
 
 [project.optional-dependencies]
 dev = ["build", "twine"]
+
+[tool.black]
+line-length = 88
+target-version = ["py312"]
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+skip_gitignore = true
+atomic = true
 
 [tool.hatch.build]
 artifacts = ["/backend/gradio_path_selector/templates", "*.pyi"]

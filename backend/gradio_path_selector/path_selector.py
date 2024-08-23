@@ -1,13 +1,14 @@
 from __future__ import annotations
 
+import json
+import os
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Callable, Sequence
 
-import os
-import json
-from pathlib import Path
 from gradio.components.base import Component
-from gradio.events import Events
 from gradio.context import Context
+from gradio.events import Events
+
 
 if TYPE_CHECKING:
     from gradio.components import Timer
