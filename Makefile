@@ -15,3 +15,7 @@ clean:
 .PHONY: test
 test:
 	echo "test"
+
+.PHONY: install
+install: build
+	pip install dist/*.whl
