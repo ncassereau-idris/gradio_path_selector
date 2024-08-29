@@ -12,7 +12,7 @@
 		change: never;
 		clear_status: LoadingStatus;
 	}>;
-	export let label = "Path Selector";
+	export let label: string | undefined = undefined;
 	export let elem_id = "";
 	export let elem_classes: string[] = [];
 	export let visible = true;
@@ -110,7 +110,9 @@
 		/>
 	{/if}
 
-	<BlockTitle {show_label} info={undefined}>{label}</BlockTitle>
+	{#if label !== undefined}
+		<BlockTitle {show_label} info={undefined}>{label}</BlockTitle>
+	{/if}
 
 	<div class="parent">
 		<div
