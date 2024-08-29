@@ -6,7 +6,7 @@ lint:
 .PHONY: build
 build:
 	gradio cc install
-	gradio cc build
+	gradio cc build --no-generate-docs
 
 .PHONY: clean
 clean:
