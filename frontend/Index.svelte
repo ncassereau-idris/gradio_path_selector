@@ -146,7 +146,7 @@
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"
-					width="16" height="16" style="display: inline; fill: white;">
+					width="16" height="16" style="display: inline; fill: var(--body-text-color);">
 					<polygon points="0 45, 45 10, 45 80"/>
 					<polygon points="40 45, 85 10, 85 80"/>
 				</svg>
@@ -242,7 +242,7 @@
 		width: inherit;
 		height: inherit;
 		fill: "none";
-		stroke: white;
+		stroke: var(--body-text-color);
 		width: 16px;
 		height: 16px;
 		stroke-width: "1.5";
@@ -252,8 +252,8 @@
 	}
 
 	svg.clippy_icon {
-		fill: grey;
-		color: white;
+		fill: var(--border-color-primary);
+		color: var(--body-text-color);
 		top: 0;
 		left: 0;
 		opacity: 1;
@@ -276,6 +276,9 @@
 		stroke-width: 1.5;
 		transition: all 300ms ease-in-out;
 	}
+	svg.check_icon>path {
+		stroke: white;
+	}
 	svg.clippy_icon.copying {
 		stroke-dashoffset: -50;
 		opacity: 0;
@@ -288,23 +291,24 @@
 	.inodes {
 		border-radius: 5px;
 		border-width: 2px;
-		border-color: grey;
+		border-color: var(--border-color-primary);
 		max-height: 300px;
 		overflow-y: scroll;
 		margin-top: 1em;
+		color: var(--body-text-color);
 	}
 
 	.inode_option {
 		padding-left: 5px;
 		padding-top: auto;
 		padding-bottom: auto;
-		border-color: grey;
+		border-color: var(--border-color-primary);
 		border-width: 1px;
-		background-color: #555555;
+		background-color: var(--background-fill-secondary);
 		transition: background-color 0.2s ease-in-out;
 	}
 
 	.inode_option:hover, .inode_option.selected {
-		background-color: #198754 ;
+		background-color: var(--secondary-400) ;
 	}
 </style>
