@@ -17,6 +17,12 @@ A path Selector component for Gradio
 ## Installation
 
 ```bash
+pip install gradio_path_selector
+```
+
+## Build from source
+
+```bash
 git clone https://github.com/ncassereau-idris/gradio_path_selector
 cd gradio_path_selector
 make build
